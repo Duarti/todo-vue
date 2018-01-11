@@ -137,8 +137,8 @@
 <style scoped>
   .overlay {
     display: flex;
-    position: absolute;
-    width: 100vw;
+    position: fixed;
+    width: 100%;
     height: 100vh;
     overflow: hidden;
     top: 0;
@@ -160,6 +160,7 @@
     z-index: 999;
     display: flex;
     flex-direction: column;
+    margin: 0 10px;
   }
 
   .overlay .modal .middle {
