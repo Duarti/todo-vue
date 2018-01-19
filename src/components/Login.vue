@@ -16,6 +16,8 @@
 </template>
 
 <script>
+  import Request from '../helpers/Request'
+
   export default {
     name: 'login',
     data () {
@@ -35,7 +37,7 @@
         e.preventDefault()
         this.erros = {usuario: '', senha: ''}
         let auth = false
-        fetch('http://localhost/todo/backend/api/usuarios/login', {
+        fetch(Request.REQUEST_URI + '/usuarios/login', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'

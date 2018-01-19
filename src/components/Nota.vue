@@ -17,7 +17,8 @@
       <ul>
         <li v-for="tarefa in nota.tarefas" class="tarefa">
           <label>
-            <input type="checkbox" v-model="tarefa.feita" v-on:click="marcar(tarefa.id)"> {{tarefa.titulo}}
+            <input type="checkbox" v-model="tarefa.feita" v-on:click="marcar(tarefa)">
+            <span>{{tarefa.titulo}}</span>
           </label>
           <button v-on:click="excluirTarefa(tarefa.id)">x</button>
         </li>
@@ -80,12 +81,15 @@
     },
     props: ['nota', 'atualizar', 'notaEditar'],
     methods: {
-      marcar: function (id) {
-        fetch(Request.REQUEST_URI + '/subtarefas/' + id, {
-          method: 'GET',
+      marcar: function (tarefa) {
+        tarefa.feita = !tarefa.feita
+        fetch(Request.REQUEST_URI + '/subtarefas/' + tarefa.id, {
+          method: 'PATCH',
           headers: {
-            'Authorization': 'Bearer ' + Auth.userToken()
-          }
+            'Authorization': 'Bearer ' + Auth.userToken(),
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(tarefa)
         })
           .then((response) => {
             if (response !== 200) {
@@ -106,7 +110,7 @@
             'Authorization': 'Bearer ' + Auth.userToken()
           }
         }).then((response) => {
-          if (response.status === 202) {
+          if (response.status === 204) {
             this.statusExcluir = 'Nota excluída.'
           } else {
             this.statusExcluir = 'Houve um erro ao tentar excluir.'
@@ -127,7 +131,7 @@
               'Authorization': 'Bearer ' + Auth.userToken()
             }
           }).then((response) => {
-            if (response.status === 202) {
+            if (response.status === 204) {
               this.statusExcluir = 'Tarefa excluída.'
             } else {
               this.statusExcluir = 'Houve um erro ao tentar excluir.'
@@ -176,6 +180,10 @@
     display: flex;
     justify-content: center;
     align-items: center;
+  }
+
+  .nota h3{
+    word-break: break-all;
   }
 
   .nota .tarefa {

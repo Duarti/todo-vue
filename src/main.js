@@ -4,6 +4,7 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import Auth from './helpers/Auth'
+import Request from './helpers/Request'
 
 Vue.config.productionTip = false
 
@@ -12,10 +13,10 @@ router.beforeEach((to, from, next) => {
     if (Auth.userToken() === null || !Auth.userToken()) {
       return next({path: '/login'})
     }
-    fetch('http://localhost/todo/backend/api/usuarios/verify', {
+    fetch(Request.REQUEST_URI + '/usuarios/verify', {
       method: 'GET',
       headers: {
-        'Authorization': Auth.userToken()
+        'Authorization': 'Bearer ' + Auth.userToken()
       }
     })
       .then((response) => {

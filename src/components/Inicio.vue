@@ -22,7 +22,7 @@
       <lista-notas v-bind:atualizacao="atualizacao" v-bind:filtro="filtro" v-bind:busca="busca"
                    v-bind:nota-editar="setNota" v-bind:atual="atual" v-bind:proxima="proxima"
                    v-bind:anterior="anterior" v-bind:set-atual="setAtual" v-bind:total="total"
-                   v-bind:set-total="setTotal"></lista-notas>
+                   v-bind:set-total="setTotal" v-bind:hora-atual="getHoraAtual"></lista-notas>
     </div>
     <cadastro-modal v-bind:aberto="aberto" v-bind:acao="alterarModalCadastro" v-bind:atualiza="atualiza"
                     v-bind:nota-editar="nota"></cadastro-modal>
@@ -46,15 +46,16 @@
         busca: '',
         atual: undefined,
         nota: undefined,
-        total: 1
+        total: 1,
+        horaAtual: ''
       }
     },
     methods: {
-      horaAtual: function () {
+      getHoraAtual: function () {
         let date = new Date()
         let h = date.getHours() < 10 ? '0' + date.getHours() : date.getHours()
         let m = date.getMinutes() < 10 ? '0' + date.getMinutes() : date.getMinutes()
-        return h + ':' + m
+        this.horaAtual = h + ':' + m
       },
       alterarModalCadastro: function () {
         this.aberto = !this.aberto
@@ -90,6 +91,7 @@
       }
     },
     created: function () {
+      this.getHoraAtual()
       let params = this.$route.query
       this.filtro = params.filtro !== undefined ? params.filtro : 'todos'
       this.busca = params.busca !== undefined ? params.busca : ''

@@ -20,7 +20,7 @@
         notas: []
       }
     },
-    props: ['atualizacao', 'filtro', 'busca', 'notaEditar', 'atual', 'proxima', 'anterior', 'setAtual', 'total', 'setTotal'],
+    props: ['atualizacao', 'filtro', 'busca', 'notaEditar', 'atual', 'proxima', 'anterior', 'setAtual', 'total', 'setTotal', 'horaAtual'],
     methods: {
       carregarNotas: function () {
         let filtro = ''
@@ -51,6 +51,7 @@
             }
           })
           .then((result) => {
+            this.horaAtual()
             this.notas = result
           })
       },

@@ -164,3 +164,7 @@ input:focus {
   max-width: 20px;
   max-height: 20px;
 }
+
+input[type='checkbox']:checked ~ span {
+  text-decoration: line-through;
+}

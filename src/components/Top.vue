@@ -8,7 +8,7 @@
       <div id="atualizacao">
         <div>
           <p>Última atualização</p>
-          <p id="tempo">{{ultima}}</p>
+          <p id="tempo">{{horaAtual}}</p>
         </div>
         <button v-on:click="atualizar">
           <img src="../assets/att.png" alt="atualizar">
@@ -26,18 +26,16 @@
     data () {
       return {
         application: 'SENAI KEEP',
-        ultima: '00:00',
         tBusca: ''
       }
     },
-    props: ['lastRequest', 'atualiza', 'horaAtual', 'setBusca', 'busca'],
+    props: ['lastRequest', 'atualiza', 'horaAtual', 'setBusca', 'busca', 'getHoraAtual'],
     methods: {
       sair: function () {
         window.localStorage.clear()
         this.$router.push('/login')
       },
       atualizar: function () {
-        this.ultima = this.horaAtual()
         this.atualiza()
       },
       buscar: function (e) {
@@ -48,7 +46,6 @@
     },
     mounted: function () {
       this.tBusca = this.busca
-      this.ultima = this.horaAtual()
     }
   }
 </script>

@@ -8,7 +8,7 @@ Vue.use(Router)
 
 const Route = new Router({
   mode: 'history',
-  base: '/todo/frontend',
+  base: '/todo/frontend/todo-vue',
   routes: [
     {
       path: '/',

@@ -7,11 +7,9 @@
           <input type="text" placeholder="Insira um Titulo" v-model="nota.titulo" class="full"
                  v-on:change="erros.titulo = ''">
           <span class="error">{{erros.titulo}}</span>
-          <ul>
+          <ul class="lista-inserir">
             <li v-for="tarefa in nota.tarefas">
-              <label>
-                <input type="checkbox" v-model="tarefa.feita">
-              </label>
+              <input type="checkbox" v-model="tarefa.feita">
               <span contenteditable="true" v-on:blur="(e)=>{tarefaChange(e,tarefa)}" v-html="tarefa.titulo"></span>
             </li>
           </ul>
@@ -153,7 +151,6 @@
     width: 100%;
     max-width: 720px;
     background-color: white;
-    max-height: 400px;
     padding: 15px;
     box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.2), -2px -2px 2px rgba(0, 0, 0, 0.2);
     position: relative;
@@ -183,4 +180,5 @@
   .fade-enter, .fade-leave-to {
     opacity: 0
   }
+
 </style>
